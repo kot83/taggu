@@ -5,7 +5,7 @@ import discord
 import datetime
 
 class Tags:
-    """The core of the tag system."""
+    """The tag system."""
 
     def __init__(self, bot):
         self.bot = bot
