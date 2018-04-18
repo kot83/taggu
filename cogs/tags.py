@@ -1,5 +1,4 @@
-    bot.add_cog(Tags(bot))
-m discord.ext import commands
+from discord.ext import commands
 import discord
 import datetime
 
