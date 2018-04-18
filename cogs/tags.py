@@ -13,9 +13,10 @@ class Tags:
         try:
             tags = await self.bot.tags.get_tags(str(ctx.guild.id))
         except:
-            await self.bot.tags.initiate_guild(str(ctx.guild.id))
+            tag = {'author': str(ctx.author.id), 'timestamp': datetime.datetime.now()}
+            await self.bot.tags.initiate_guild(str(ctx.guild.id), tag)
             return await ctx.send('Guild has been successfully set up!')
-        await ctx.send('Guild already set up!')
+        return await ctx.send('Guild already set up!')
 
     @commands.group(invoke_without_command=True)
     async def tag(self, ctx, *, tag: str=None):
