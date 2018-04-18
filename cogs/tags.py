@@ -10,6 +10,7 @@ class Tags:
     
     @commands.command()
     async def setup(self, ctx):
+        '''Sets up a guild.'''
         try:
             tags = await self.bot.tags.get_tags(str(ctx.guild.id))
         except:
@@ -20,6 +21,7 @@ class Tags:
 
     @commands.group(invoke_without_command=True)
     async def tag(self, ctx, *, tag: str=None):
+        '''Gets a tag'''
         tags = await self.bot.tags.get_tags(str(ctx.guild.id))
 
         if tag is None:
@@ -34,6 +36,7 @@ class Tags:
 
     @tag.command()
     async def owner(self, ctx, *, tag: str=None):
+        '''Gets a tag's owner'''
         tags = await self.bot.tags.get_tags(str(ctx.guild.id))
 
         if tag is None:
@@ -42,12 +45,14 @@ class Tags:
         tag = tags.get(tag)
         
         if tag is not None:
-            await ctx.send(tag.get('author', 'Could not find tag owner'))
+            owner = self.bot.get_user(int(tag.get('author')))
+            await ctx.send(f'{owner.name}#{owner.discriminator}')
         else:
             await ctx.send('Tag not found')
 
     @tag.command()
     async def create(self, ctx, tag: str, *, content: str):
+        '''Creates a tag.'''
         tags = await self.bot.tags.get_tags(str(ctx.guild.id))
 
         if tags.get(tag) is not None:
@@ -59,6 +64,7 @@ class Tags:
 
     @tag.command()
     async def edit(self, ctx, tag: str, *, content: str):
+        '''Edit a tag you own.'''
         tags = await self.bot.tags.get_tags(str(ctx.guild.id))
         name = tag
         tag = tags.get(tag)
@@ -73,6 +79,7 @@ class Tags:
 
     @tag.command()
     async def delete(self, ctx, *, tag: str):
+        '''Deletes a tag you own.'''
         tags = await self.bot.tags.get_tags(str(ctx.guild.id))
 
         if tags.get(tag) is not None:
