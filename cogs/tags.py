@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-
-from discord.ext import commands
+    bot.add_cog(Tags(bot))
+m discord.ext import commands
 import discord
 import datetime
 
@@ -87,3 +86,4 @@ class Tags:
 
 def setup(bot):
     bot.add_cog(Tags(bot))
+
