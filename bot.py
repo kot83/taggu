@@ -48,7 +48,8 @@ async def owner(ctx, *, tag: str=None):
     tag = tags.get(tag)
     
     if tag is not None:
-        await ctx.send(tag.get('author', 'Could not find tag owner'))
+        author = bot.get_user(int(tag.get('author')))
+        await ctx.send(f'{author.name}#{author.discriminator}'))
     else:
         await ctx.send('Tag not found')
 
