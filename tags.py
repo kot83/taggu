@@ -29,3 +29,6 @@ async def del_tag(guild: str, tag: str):
     del taglist[tag]
     tags.set(taglist)
 
+async def initiate_guild(guild: str):
+    tags = db.collection(u'taggu').document(u'tags').collection('guilds').document(guild)
+    tags.set()
