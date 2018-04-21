@@ -35,6 +35,15 @@ class Tags:
             await ctx.send('Tag not found')
 
     @tag.command()
+    async def list(self, ctx):
+        '''Lists all tags in a guild'''
+        tags = await self.bot.tags.get_tags(str(ctx.guild.id))
+
+        taglist = '\n'.join([tag for tag in tags])
+        e = discord.Embed(description=taglist)
+        await ctx.send(embed=e)
+
+    @tag.command()
     async def owner(self, ctx, *, tag: str=None):
         '''Gets a tag's owner'''
         tags = await self.bot.tags.get_tags(str(ctx.guild.id))
